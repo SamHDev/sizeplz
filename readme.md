@@ -22,8 +22,7 @@ OPTIONS:
     -r, --round <ROUND>    The number of figures to round too. [default: 0]
     -s, --sort <sort>      How the results should be sorted [possible values: size, name, created,
                            modified]
-    -u, --unit <UNIT>      The unit of file size to output [possible values: b, kb, mb, gb, tb, pb,
-                           auto]
+    -u, --unit <UNIT>      The unit of file size to output [possible values: b, kb, mb, gb, tb, pb, auto]
 ```
 
 ### Install
