@@ -116,7 +116,8 @@ pub(crate) fn handle_folder(path: PathBuf, depth: u16) -> BoxFuture<'static, Res
                     };
 
                 // add file size to result.
-                result += get_metadata_size(&entry_meta);
+                let file_size = get_metadata_size(&entry_meta);
+                result += file_size;
 
                 if depth != 0 {
                     // create file record.
