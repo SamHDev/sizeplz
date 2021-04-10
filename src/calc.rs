@@ -6,6 +6,7 @@ use tokio::fs;
 
 use crate::metadata::get_metadata_size;
 use crate::util::{convert_os_string_option, convert_time};
+use std::time::SystemTime;
 
 // Get the size of a file from a path
 // - catches permissions errors
@@ -125,8 +126,8 @@ pub(crate) fn handle_folder(path: PathBuf, depth: u16) -> BoxFuture<'static, Res
                         path: entry_path.clone(),
                         name: convert_os_string_option(&entry_path.file_name(), "NAME"),
                         size: file_size,
-                        modified: convert_time(entry_meta.modified()?),
-                        created: convert_time(entry_meta.created()?),
+                        modified: convert_time(entry_meta.modified().unwrap_or(SystemTime::UNIX_EPOCH)),
+                        created: convert_time(entry_meta.created().unwrap_or(SystemTime::UNIX_EPOCH)),
                         file: true,
                         children: vec![],
                     })
@@ -159,8 +160,8 @@ pub(crate) fn handle_folder(path: PathBuf, depth: u16) -> BoxFuture<'static, Res
             name: convert_os_string_option(&path.file_name(), path.to_str().unwrap_or("?")),
             path,
             size: result,
-            modified: convert_time(metadata.modified()?),
-            created: convert_time(metadata.created()?),
+            modified: convert_time(metadata.modified().unwrap_or(SystemTime::UNIX_EPOCH)),
+            created: convert_time(metadata.created().unwrap_or(SystemTime::UNIX_EPOCH)),
             file: false,
             children,
         })
@@ -176,7 +177,10 @@ pub fn catch_permission<T>(path: &Path, x: Result<T>) -> Result<Option<T>> {
                 println!("Permission Denied: {:?}", path);
                 Ok(None)
             }
-            _ => Err(e)
+            _ => {
+                println!("Error occurred on path: {:?}", path);
+                Err(e)
+            }
         }
     }
 }
