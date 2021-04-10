@@ -1,5 +1,6 @@
 use crate::calc::Record;
 
+// sort keys/methods
 pub enum SortKey {
     Order,
     Name,
@@ -9,6 +10,7 @@ pub enum SortKey {
 }
 
 impl SortKey {
+    // parse a sort key from args.
     pub fn parse(x: &str) -> Option<SortKey> {
         match x {
             "order" => Some(Self::Order),
@@ -21,6 +23,7 @@ impl SortKey {
         }
     }
 
+    // sort a mut ref to an array of records using given key type.
     pub fn sort(&self, records: & mut Vec<Record>) {
         match &self {
             SortKey::Order => {},

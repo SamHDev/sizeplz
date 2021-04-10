@@ -1,5 +1,6 @@
 use clap::{App, Arg};
 
+// create a clang app for arg processing.
 pub fn app<'x>() -> App<'x> {
     App::new(env!("CARGO_PKG_NAME"))
         .version(env!("CARGO_PKG_VERSION"))

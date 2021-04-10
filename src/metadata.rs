@@ -1,5 +1,6 @@
 use std::fs::Metadata;
 
+// metadata util to get file size.
 #[allow(unreachable_code)]
 pub fn get_metadata_size(meta: &Metadata) -> u64 {
     #[cfg(windows)]
