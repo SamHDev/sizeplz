@@ -25,20 +25,20 @@ OPTIONS:
     -u, --unit <UNIT>      The unit of file size to output [possible values: b, kb, mb, gb, tb, pb, auto]
 ```
 
-#### Quickstarts
+#### Examples
 With a depth of 2:
 ```
-sizeplz.exe --depth 2
+sizeplz --depth 2
 ```
 
 Show sizes in GB with 2dp of accuracy.
 ```
-sizeplz.exe --unit gb --round 2
+sizeplz --unit gb --round 2
 ```
 
 Sort by sizes from large to small
 ```
-sizeplz.exe --sort size --invert
+sizeplz --sort size --invert
 ```
 
 #### Sample Output
@@ -53,14 +53,11 @@ sizeplz.exe --sort size --invert
 ### Install
 #### Download
 Head over to the [releases](https://github.com/SamHDev/sizeplz/releases) page and download a binary for your system.
+Place it in your path to use globaly.
 
-To install on unix: run this command (requires wget)
-```
-sudo wget https://github.com/SamHDev/sizeplz/releases/download/0.0.1/sizeplz -O /usr/bin/sizeplz
-```
 
 #### Build
-Building from source will require the rust chain, which can be installed using [rustup](https://rustup.rs)
+Building from source will require the rust toolchain, which can be installed using [rustup](https://rustup.rs)
 ```
 git clone https://github.com/samhdev/sizeplz.git
 cd sizeplz
