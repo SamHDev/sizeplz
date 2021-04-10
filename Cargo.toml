@@ -1,6 +1,6 @@
 [package]
 name = "sizeplz"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Sam Huddart <samhdev.code@gmail.com>"]
 edition = "2018"
 description = "A tool to get the size of folders within a directory"

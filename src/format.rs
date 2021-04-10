@@ -135,7 +135,7 @@ fn format_record(mut record: Record, indent: usize, last: bool, pad: &usize, for
     }
 
     let form = format.autosize(&record.size);
-    println!("{}{}{}  {: >4} {}", ind, record.name, " ".repeat(pad - record.name.len()), form.string(record.size, round), form.suffix());
+    println!("{0}{1: <2$} {3: >4} {4}", ind, record.name, pad, form.string(record.size, round), form.suffix());
 
     sort.sort(&mut record.children);
     if *invert { record.children.reverse(); }
