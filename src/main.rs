@@ -11,7 +11,7 @@ use tokio;
 use crate::args::app;
 use std::path::{PathBuf};
 use std::str::FromStr;
-use crate::format::{RoundFactor, FormatUnit, format_record};
+use crate::format::{RoundFactor, FormatUnit, initial_record};
 use crate::sort::SortKey;
 
 
@@ -43,5 +43,5 @@ async fn main() {
 
     let calc = calc::handle_folder(path, depth).await.expect("Failed to calculate");
 
-    format_record(calc, 0, false, &unit, &places, &files, &empty, &sort, &invert);
+    initial_record(calc, &unit, &places, &files, &empty, &sort, &invert);
 }

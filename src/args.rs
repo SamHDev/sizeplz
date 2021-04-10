@@ -4,6 +4,7 @@ pub fn app<'x>() -> App<'x> {
     App::new(env!("CARGO_PKG_NAME"))
         .version(env!("CARGO_PKG_VERSION"))
         .about("Simple folder size calculator")
+        .author("Sam Huddart <software@samh.dev>")
         .arg(
             Arg::new("unit")
                 .long("unit")

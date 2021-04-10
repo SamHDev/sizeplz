@@ -123,7 +123,7 @@ impl RoundFactor {
     }
 }
 
-pub fn format_record(mut record: Record, indent: usize, last: bool, format: &FormatUnit, round: &RoundFactor, files: &bool, empty: &bool, sort: &SortKey, invert: &bool) {
+fn format_record(mut record: Record, indent: usize, last: bool, pad: &usize, format: &FormatUnit, round: &RoundFactor, files: &bool, empty: &bool, sort: &SortKey, invert: &bool) {
     let mut ind = String::new();
     if indent != 0 {
         ind.push_str(&"│  ".repeat(indent - 1));
@@ -135,15 +135,24 @@ pub fn format_record(mut record: Record, indent: usize, last: bool, format: &For
     }
 
     let form = format.autosize(&record.size);
-    println!("{}'{}'  {} {}", ind, record.name, form.string(record.size, round), form.suffix());
+    println!("{}{}{}  {: >4} {}", ind, record.name, " ".repeat(pad - record.name.len()), form.string(record.size, round), form.suffix());
 
     sort.sort(&mut record.children);
     if *invert { record.children.reverse(); }
+
+    let mut max_size = 0;
+    for child in &record.children { if child.name.len() > max_size { max_size = child.name.len(); }}
+    if max_size > 48 { max_size = 48; }
 
     let length = record.children.len();
     for (i, child) in record.children.into_iter().enumerate() {
         if child.file && !*files { continue; }
         if child.size == 0 && *empty { continue; }
-        format_record(child, indent + 1, i + 1 == length, format, round, files, empty, sort, invert);
+        format_record(child, indent + 1, i + 1 == length, &max_size, format, round, files, empty, sort, invert);
     }
+}
+
+pub fn initial_record(record: Record, format: &FormatUnit, round: &RoundFactor, files: &bool, empty: &bool, sort: &SortKey, invert: &bool) {
+    let len = record.name.len();
+    format_record(record, 0, true, &len, format, round, files, empty, sort, invert)
 }
