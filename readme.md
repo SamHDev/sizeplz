@@ -41,6 +41,15 @@ Sort by sizes from large to small
 sizeplz.exe --sort size --invert
 ```
 
+#### Sample Output
+```
+.  784 mb
+├  .git         66 kb
+├  .idea         6 kb
+├  src          18 kb
+└  target      784 mb
+```
+
 ### Install
 #### Download
 Head over to the [releases](https://github.com/SamHDev/sizeplz/releases) page and download a binary for your system.
