@@ -21,7 +21,7 @@ impl SortKey {
         }
     }
 
-    pub fn sort(&self, mut records: & mut Vec<Record>) {
+    pub fn sort(&self, records: & mut Vec<Record>) {
         match &self {
             SortKey::Order => {},
             SortKey::Name => records.sort_by_key(|x| x.name.to_string()),
